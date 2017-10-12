@@ -22,8 +22,8 @@
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
+    "@types/jasmine": "^2.5.36",
     "@types/node": "^6.0.45",
-    "@types/jasmine": "2.5.36",
     "angular2-template-loader": "^0.6.0",
     "awesome-typescript-loader": "^3.0.4",
     "css-loader": "^0.26.1",
