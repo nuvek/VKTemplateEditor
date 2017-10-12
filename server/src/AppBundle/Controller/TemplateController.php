@@ -9,7 +9,9 @@
 namespace AppBundle\Controller;
 
 
-class TemplateController
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+class TemplateController extends Controller
 {
 
 }
