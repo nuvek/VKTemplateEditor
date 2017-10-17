@@ -38,3 +38,8 @@ services:
           class: AppBundle\Services\Helpers
           arguments: []
           public: true
+
+    app.template:
+          class: AppBundle\Services\TemplateService
+          arguments: ['@doctrine.orm.entity_manager']
+          public: true

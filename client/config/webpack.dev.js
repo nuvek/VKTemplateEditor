@@ -19,6 +19,13 @@ module.exports = webpackMerge(commonConfig, {
 
     devServer: {
         historyApiFallback: true,
-        stats: 'minimal'
+        stats: 'minimal',
+        proxy: {
+            '/api' : {
+                target: 'http://tpleditor.nuvek-local.com',
+                secure: false,
+                changeOrigin: true
+            }
+        }
     }
 });

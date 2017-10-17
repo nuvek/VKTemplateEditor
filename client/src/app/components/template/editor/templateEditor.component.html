@@ -1,0 +1,45 @@
+<div class="container">
+    <mat-card *ngIf="templateItem">
+    <mat-card-title><span>{{templateItem.title}}</span> Details</mat-card-title>
+    <mat-card-content>
+            <form class="template-form" #templateForm="ngForm">
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field class="template-form-field">
+                            <input name="title" id="title" matInput placeholder="Title" [(ngModel)]="templateItem.title"
+                                   #title="ngModel" required>
+                            <mat-error *ngIf="title.errors && title.errors.required">Title is <strong>required</strong></mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field class="template-form-field">
+                            <textarea name="description" id="description" matInput matTextareaAutosize matAutosizeMaxRows="10"
+                                      placeholder="Description" [(ngModel)]="templateItem.description"
+                                      #description="ngModel" required></textarea>
+                            <mat-error *ngIf="description.errors && description.errors.required">Description is <strong>required</strong></mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label>Content</label>
+                        <ckeditor name="content" id="content"
+                                [(ngModel)]="templateItem.content"
+                                [config]="_ckEditorConfig"
+                                [readonly]="false"
+                                debounce="500"
+                                #content="ngModel">
+                        </ckeditor>
+                        <mat-error *ngIf="content.errors && content.errors.required">Title is <strong>required</strong></mat-error>
+                    </div>
+                </div>
+            </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button [disabled]="!templateForm.form.valid" (click)="save()" mat-raised-button color="primary">Save</button>
+        <button (click)="cancel()" mat-button>Cancel</button>
+    </mat-card-actions>
+</mat-card>
+</div>

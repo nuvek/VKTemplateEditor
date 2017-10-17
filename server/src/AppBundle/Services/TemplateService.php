@@ -11,6 +11,7 @@ namespace AppBundle\Services;
 
 use AppBundle\Entity\Template;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class TemplateService
 {
@@ -19,7 +20,7 @@ class TemplateService
      */
     private $_entityManager;
 
-    public function TemplateService($entityManager) {
+    public function __construct($entityManager) {
         $this->_entityManager = $entityManager;
     }
 
@@ -28,10 +29,18 @@ class TemplateService
     }
 
     /**
+     * @param int $page
+     * @param int $pageSize
      * @return array
      */
-    public function getTemplateList() {
-        return $this->getRepository()->findAll();
+    public function getTemplateList($page=0, $pageSize=10) {
+        $query = $this->getRepository()->createQueryBuilder('t')
+            ->getQuery();
+        $paginator = new Paginator($query);
+        $paginator->getQuery()
+            ->setFirstResult($page * $pageSize)
+            ->setMaxResults($pageSize);
+        return array('total'=>$paginator->count(), 'data'=>$paginator->getIterator());
     }
 
     public function getTemplateById($templateId) {

@@ -1,0 +1,43 @@
+<div class="container">
+    <mat-toolbar>Template List</mat-toolbar>
+
+    <mat-table #table [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+            <mat-cell *matCellDef="let templateItem"> {{templateItem.id}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+            <mat-cell *matCellDef="let templateItem"> {{templateItem.title}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="description">
+            <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+            <mat-cell *matCellDef="let templateItem"> {{templateItem.description}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>&nbsp;</mat-header-cell>
+            <mat-cell *matCellDef="let templateItem">
+                <button mat-icon-button (click)="edit(templateItem.id)">
+                    <mat-icon>mode_edit</mat-icon>
+                </button>
+                <button mat-icon-button (click)="render(templateItem.id)">
+                    <mat-icon>description</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator #paginator
+                   [length]="dataSource.total"
+                   [pageIndex]="0"
+                   [pageSize]="5"
+                   [pageSizeOptions]="[1, 5, 10, 25, 100]"
+                   (page)="onPaginateChange($event)">
+    </mat-paginator>
+</div>
+
+<div style="position: fixed; bottom: 20px; right: 20px">
+<button (click)="addTemplate()" mat-fab color="primary"><mat-icon aria-label="Add a new template">add</mat-icon></button>
+</div>

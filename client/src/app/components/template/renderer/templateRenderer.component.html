@@ -1,0 +1,25 @@
+<div class="container">
+    <mat-card *ngIf="templateItem">
+        <mat-card-title><span>{{templateItem.title}}</span></mat-card-title>
+        <mat-card-content>
+            <form class="template-form" #templateForm="ngForm">
+                <div class="row" *ngFor="let templateField of _templateFields">
+                    <div class="col">
+                        <mat-form-field class="template-form-field">
+                            <input [name]="templateField.name" [id]="templateField.name" matInput
+                                   [placeholder]="templateField.label" [(ngModel)]="templateField.value"
+                                   (ngModelChange)="renderTemplate()">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col" [innerHTML]="_result | keepHtml">
+                    </div>
+                </div>
+            </form>
+        </mat-card-content>
+        <mat-card-actions>
+            <button (click)="cancel()" mat-button>Cancel</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

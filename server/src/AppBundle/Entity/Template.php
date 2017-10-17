@@ -32,10 +32,16 @@ class Template
     private $title;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=300)
      * @var string
      */
     private $description;
+
+    /**
+     * @ORM\Column(type="text")
+     * @var string
+     */
+    private $content;
 
     public function __construct()
     {
@@ -87,6 +93,22 @@ class Template
     public function setDescription($description)
     {
         $this->description = $description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param string $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
     }
 
 }
